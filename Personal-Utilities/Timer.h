@@ -14,12 +14,11 @@ namespace Leon::Utils
 }
 #else
 
-#include "LNpch.h"
 #include <stdint.h>
 #include <chrono>
 
 
-namespace Leon::Utils {
+namespace Reun::Utils {
 	class Timer
 	{
 	public:

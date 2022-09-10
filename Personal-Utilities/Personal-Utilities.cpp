@@ -2,11 +2,11 @@
 //
 
 #include "Personal-Utilities.h"
-
+#include "Utils.h"
 using namespace std;
 
 int main()
 {
-	cout << "Hello CMake." << endl;
+	cout << Reun::Utils::GetCurrentDate() << endl;
 	return 0;
 }

@@ -2,7 +2,7 @@
 
 #include "typedefs.h"
 
-namespace Leon::Utils
+namespace Reun::Utils
 {
 	template<uint32 LengthofAverage, typename T> // typename T must support T a/N, and give an accurate result, eg: double, float
 	class RollingAverage

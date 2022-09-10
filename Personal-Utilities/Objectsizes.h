@@ -2,7 +2,7 @@
 
 #include "typedefs.h"
 
-namespace Leon::Utils {
+namespace Reun::Utils {
 	template<class T>
 	constexpr uint8 getsizeof()
 	{

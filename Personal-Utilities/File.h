@@ -1,7 +1,8 @@
 #pragma once
 
-namespace Leon::Utils
+#include <string>
+namespace Reun::Utils
 {
-	void UtilsCreateDirectory(const char* inp);
-	void UtilsCreateDirectories(const char* inp);
+	void UtilsCreateDirectory(const std::string_view& inp);
+	void UtilsCreateDirectories(const std::string_view& inp);
 }

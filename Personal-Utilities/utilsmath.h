@@ -3,11 +3,9 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>
 #include "typedefs.h"
-#include "glm/glm.hpp"
-#include "glm/ext/matrix_transform.hpp"
 
 
-namespace Leon::Utils {
+namespace Reun::Utils {
 	inline void InitRand() {
 		srand((uint8)time(NULL));
 	}
@@ -21,24 +19,6 @@ namespace Leon::Utils {
 	{
 		return (((value-beforemin) / (beforemax-beforemin))* (aftermax-aftermin))+aftermin;
 	}
-	
-
-	/*
-	int getrandomnumbetween(const int& max, const int& min)
-	{
-		int ret;
-		ret = rand();
-		ret = ret % (max - min) + min;
-		return ret;
-	}
-	template<class X, class Y>
-	void fillupwithrandomnumber(const i32& max, const i32& min, X* data, Y& size)
-	{
-		for (int i = 0; i < size; i++)
-		{
-			data[i] = getrandomnumbetween(max, min);
-		}
-	}*/
 	template<class T>
 	uint8 log10whole(T t)
 	{
