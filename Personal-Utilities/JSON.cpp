@@ -1,8 +1,69 @@
 #include "JSON.h"
+#include <unordered_set>
 
-
-namespace Reun::Utils::JSONREADER
+namespace Reun::Utils::Inner
 {
+	namespace Json {
+		int findinstringkeeptrackofcharcount(const std::string& inp, int start, const std::unordered_set<char>& inc, int& linec, int& charcount)
+		{
+			while (start<inp.size())
+			{
+				const char& temp = inp[start];
+				if (temp == '\n')
+				{
+					linec++;
+					charcount = 0;
+				}
+				else if (temp != '\t')
+				{
+					charcount++;
+				}
+				if (inc.contains(temp))
+					return start;
+				
+				start++;
+			}
+			return -1;
+		}
+		/// <summary>
+		/// can be decimal or integer
+		/// </summary>
+		/// <param name="inp"></param>
+		/// <returns> -1 means err</returns>
+		int findendofnum(const std::string_view& inp, int start, int& linec, int& charc)
+		{
+			while ((inp[start] >= '0' && inp[start] <= '9') || (inp[start] == '.' || inp[start] == ','))
+			{
+				start++;
+				charc++;
+				if (start == inp.size())
+					return -1;
+			}
+			return start;
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="Logger"></typeparam>
+		/// <typeparam name="LOG"></typeparam>
+		/// <returns>-1 means err</returns>
+		int findendofstring(const std::string_view& inp, int start, int& linec, int& charc)
+		{
+			start++;
+			while (inp[start] != '"')
+			{
+				if (inp[start] == '\n')
+				{
+					linec++;
+					charc = 0;
+				}
+				else if (inp[start] == '\\')
+				{
+					
+				}
+			}
+		}
+	}
 
 }
 
@@ -100,39 +161,39 @@ namespace Reun::Utils
 		int prevchar;
 		while (end)
 		{
-			char& temp = inp[cont];
+			const char& temp = inp[cont];
 			//find stuff we care about
 			if (temp == '\n')
 			{
 				linec++;
 				currchar = 0;
 			}
-			else if (!(temp == '\t' || temp == ' '))
+			else if (temp != '\t')
 			{
 				if (temp == '[') {
 					found = ARR;
 					end = true;
 					prevline = linec;
-					prechar = currchar;
+					prevchar = currchar;
 				}
 				else if (temp == '{'){
 					found = OBJ;
 					end = true;
 					prevline = linec;
-					prechar = currchar;
+					prevchar = currchar;
 				}
 				else if (temp == '"'){
 					found = STR;
 					end = true;
 					prevline = linec;
-					prechar = currchar;
+					prevchar = currchar;
 				}
 				else
 				{
 					found = OTH;
 					end = true;
 					prevline = linec;
-					prechar = currchar;
+					prevchar = currchar;
 				}
 				currchar++;
 			}
@@ -146,9 +207,11 @@ namespace Reun::Utils
 			{
 				if (LOG)
 					Logger << "[JSON READER] Unexpected token at line: " << prevline << " character: " << prevchar;
+				curr.type = Field::FieldType::Null;
 				return;
 			}
-			
+			cont = Inner::Json::findendofnum(inp, cont, linec, currchar);
+			return;
 			
 		}
 	}
