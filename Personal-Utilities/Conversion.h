@@ -31,4 +31,29 @@ namespace Reun::Utils {
 		} while (i != size);
 		return ret;
 	}
+	constexpr bool isfloat(const std::string_view& inp)
+	{
+		int i = inp.size() > 0 ? (inp[0] == '-' ? 1 : 0) : 0;
+		bool sep = false;
+		while (i < inp.size())
+		{
+			if (inp[i] == '.' || inp[i] == ',') {
+				if (sep)
+					return false;
+				sep = true;
+			}
+			else if (!(inp[i] >= '0' && inp[i] <= '9')) {
+				return false;
+			}
+		}
+	}
+	constexpr bool isdigit(const std::string_view& inp)
+	{
+		int i = inp.size() > 0 ? (inp[0] == '-' ? 1 : 0) : 0;
+		while(i < inp.size()) {
+			if (!(inp[i] >= '0' && inp[i] <= '9'))
+				return false;
+		}
+		return true;
+	}
 }

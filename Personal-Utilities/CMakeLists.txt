@@ -6,7 +6,7 @@ cmake_minimum_required (VERSION 3.8)
 file(GLOB_RECURSE SOURCE_FILES "*.cpp")
 
 # Add source to this project's executable.
-add_executable (Personal-Utilities "Personal-Utilities.cpp" SOURCE_FILES)
+add_executable (Personal-Utilities "Personal-Utilities.cpp" ${SOURCE_FILES} "JSON.h" "JSON.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Personal-Utilities PROPERTY CXX_STANDARD 20)

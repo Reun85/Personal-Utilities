@@ -1,11 +1,8 @@
 #include "Date.h"
 
 namespace Reun::Utils {
-	std::string GetCurrentDate(const bool firsttwoinyear);
-	{
-		return move(GetCurrentDate("-", firsttwoinyear));
-	}
-	std::string GetCurrentDate(const std::string_view& separator1, const bool firsttwoinyear);
+	/*
+	std::string GetCurrentDate(const std::string_view& separator1, const bool firsttwoinyear)
 	{
 		using namespace std;
 		using namespace std::chrono;
@@ -17,5 +14,5 @@ namespace Reun::Utils {
 		std::string ret;
 		ret.resize()
 		return move(ret);
-	}
+	}*/
 }
